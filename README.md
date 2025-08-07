@@ -10,7 +10,23 @@ USERNAME=[your username]
 PASSWORD=[your password]
 ```
 
-Get a google [api key credential](https://developers.google.com/workspace/guides/create-credentials#api-key) in json format and put it in `token/token.json`
+Get a google [api key credential](https://developers.google.com/workspace/guides/create-credentials#api-key) in json format and put it in `token/token.json`. It should look something like:
+
+```json
+{
+  "type": "service_account",
+  "project_id": "your-project-id",
+  "private_key_id": "your-private-key-id",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nyour-private-key\n-----END PRIVATE KEY-----\n",
+  "client_email": "your-client-email@your-client-domain.com",
+  "client_id": "your-client-id",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/your-client-cert",
+  "universe_domain": "googleapis.com"
+}
+```
 
 Build the docker image:
 ```bash
