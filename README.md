@@ -1,8 +1,18 @@
 # grades-updater
 
-This repository serves as a reference for anyone looking to develop their own HSE LMS parser.
+This repository serves as a reference for anyone looking to develop their own HSE LMS parser. It is not meant to be a 'plug and play' solution.
 
-## How it used
+## What it does
+
+1. Aquires auth token for HSE LMS using the username and password you provided inside `.env` file.
+2. Goes to the course page and parses the HTML table with student grades.
+3. Inserts it to the google sheets using the token.json.
+
+## Tech Stack
+
+The script uses [selenium](https://www.selenium.dev/) inside docker to simulate a browser session (needed to aquire the auth token) and download the course page, [beautifulsoup4](https://pypi.org/project/beautifulsoup4/) for parsing content of an HTML page and [gspread](https://docs.gspread.org/en/latest/) to interact with google sheets.
+
+## How it was used
 
 Put your hse username and password inside `.env` file:
 ```bash
@@ -33,15 +43,10 @@ Build the docker image:
 docker build -t update-grades .
 ```
 
-Run the script (assuming you are in repo folder):
+Run the script (assuming you are in repo folder) mounting the token `folder` and using the `.env` file:
 ```bash
 sudo docker run \
   --volume ./token:/app/token \
   --env-file=.env \
   update-notes
 ```
-## What it does
-
-1. Aquires auth token for HSE LMS using the username and password you provided inside `.env` file. It does it via selenium that simulates a firefox browser session (that is why the docker is used).
-2. Goes to the course page and parses the HTML table with student grades.
-3. Inserts it to the google sheets using the token.json.
