@@ -24,3 +24,8 @@ sudo docker run \
   --env-file=.env \
   update-notes
 ```
+## What it does
+
+1. Aquires auth token for HSE LMS using the username and password you provided inside `.env` file. It does it via selenium that simulates a firefox browser session (that is why the docker is used).
+2. Goes to the course page and parses the HTML table with student grades.
+3. Inserts it to the google sheets using the token.json.
